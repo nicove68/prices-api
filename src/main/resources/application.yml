@@ -1,0 +1,17 @@
+server:
+  port: 5000
+  servlet:
+    context-path: /prices-api
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:prices_db
+    driverClassName: org.h2.Driver
+    username: prices
+    password: 1234
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
