@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PriceRepository extends CrudRepository<Price, Long> {
 
-  List<Price> findAll();
+  List<Price> findAllByBrandId(int brandId);
 }

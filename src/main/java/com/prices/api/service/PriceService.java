@@ -1,6 +1,7 @@
 package com.prices.api.service;
 
 import com.prices.api.mapper.PriceMapper;
+import com.prices.api.model.Brand;
 import com.prices.api.model.PriceDTO;
 import com.prices.api.repository.PriceRepository;
 import java.util.List;
@@ -22,9 +23,10 @@ public class PriceService {
     this.priceMapper = priceMapper;
   }
 
-  public List<PriceDTO> findAll() {
-    logger.info("Find all prices");
-    return priceRepository.findAll()
+  public List<PriceDTO> findByBrand(Brand brand) {
+    logger.info("Find all prices for brand {}", brand);
+
+    return priceRepository.findAllByBrandId(brand.getId())
         .stream()
         .map(priceMapper::toPriceDTO)
         .collect(Collectors.toList());

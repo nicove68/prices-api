@@ -13,10 +13,11 @@ import lombok.NoArgsConstructor;
 @Builder
 public class PriceDTO {
 
+  private int productId;
+  private int brandId;
+  private int priceList;
   private LocalDateTime startDate;
   private LocalDateTime endDate;
-  private int priceList;
-  private int productId;
   private BigDecimal amount;
   private String curr;
 }
