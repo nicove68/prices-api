@@ -29,7 +29,7 @@ public class PriceMapperTest {
         .startDate(LocalDateTime.parse("2020-01-01T23:59:59"))
         .endDate(LocalDateTime.parse("2020-01-02T23:59:59"))
         .priceList(10)
-        .productId(9999)
+        .productId(9999L)
         .priority(1)
         .amount(BigDecimal.valueOf(45.55))
         .curr("EUR")
@@ -37,7 +37,7 @@ public class PriceMapperTest {
 
     PriceDTO priceDTO = priceMapper.toPriceDTO(entityPrice);
 
-    Assert.assertEquals(9999, priceDTO.getProductId());
+    Assert.assertEquals(Long.valueOf(9999), priceDTO.getProductId());
     Assert.assertEquals(1, priceDTO.getBrandId());
     Assert.assertEquals(10, priceDTO.getPriceList());
     Assert.assertEquals("2020-01-01T23:59:59", priceDTO.getStartDate().toString());

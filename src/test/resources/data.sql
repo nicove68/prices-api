@@ -6,7 +6,7 @@ CREATE TABLE prices (
     start_date TIMESTAMP WITH TIME ZONE DEFAULT NOT NULL,
     end_date TIMESTAMP WITH TIME ZONE DEFAULT NOT NULL,
     price_list INT NOT NULL,
-    product_id INT NOT NULL,
+    product_id BIGINT NOT NULL,
     priority INT NOT NULL,
     amount DECIMAL(13,2) NOT NULL,
     curr VARCHAR(3) NOT NULL

@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class PriceDTO {
 
-  private int productId;
+  private Long productId;
   private int brandId;
   private int priceList;
   private LocalDateTime startDate;

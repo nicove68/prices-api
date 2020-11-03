@@ -11,9 +11,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.TimeZone;
-import javax.annotation.PostConstruct;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,16 +33,6 @@ public class ApiConfiguration implements WebMvcConfigurer {
         .setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"))
         .registerModule(new JavaTimeModule())
         .registerModule(new Jdk8Module());
-  }
-
-  // TODO: delete when the develop finished
-  @PostConstruct
-  void showJVMTimeZone() {
-    Calendar c = Calendar.getInstance();
-    TimeZone tz = c.getTimeZone();
-    System.out.println("###################################################");
-    System.out.println("####   TIMEZONE: " + tz.getDisplayName());
-    System.out.println("###################################################");
   }
 
   @Bean

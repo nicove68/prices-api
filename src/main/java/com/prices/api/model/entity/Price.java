@@ -26,7 +26,7 @@ public class Price {
   private LocalDateTime startDate;
   private LocalDateTime endDate;
   private int priceList;
-  private int productId;
+  private Long productId;
   private int priority;
   private BigDecimal amount;
   private String curr;
