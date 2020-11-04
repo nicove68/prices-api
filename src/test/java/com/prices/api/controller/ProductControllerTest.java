@@ -51,7 +51,7 @@ public class ProductControllerTest {
         .when(priceService).findActivePrice(anyString(), anyLong(), any(Brand.class));
 
     mvc.perform(
-        get(BASE_PATH + "/1234/prices" )
+        get(BASE_PATH + "/1234/price" )
             .param("date", "2000-10-31T01:30:00.000Z")
             .header("x-brand", "ZARA")
             .contentType(APPLICATION_JSON))
@@ -62,7 +62,7 @@ public class ProductControllerTest {
   @Test
   public void findActiveProductPrice_withWrongBrand_fail() throws Exception {
     mvc.perform(
-        get(BASE_PATH)
+        get(BASE_PATH + "/1234/price" )
             .header("x-brand", "WORLD")
             .contentType(APPLICATION_JSON))
         .andDo(print())

@@ -1,6 +1,5 @@
 package com.prices.api.service;
 
-import static com.prices.api.model.Brand.LEFTIES;
 import static com.prices.api.model.Brand.ZARA;
 import static java.math.RoundingMode.FLOOR;
 import static org.junit.Assert.assertEquals;
@@ -8,7 +7,6 @@ import static org.junit.Assert.assertEquals;
 import com.prices.api.exception.rest.NotFoundException;
 import com.prices.api.model.PriceDTO;
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.TimeZone;
 import org.junit.Before;
 import org.junit.Rule;
@@ -88,19 +86,5 @@ public class PriceServiceTest {
     exception.expectMessage("No active price found for date [2020-06-16T21:00:00.000Z], product_id [666] and brand [ZARA]");
 
     priceService.findActivePrice("2020-06-16T21:00:00.000Z", 666L, ZARA);
-  }
-
-  @Test
-  public void findByBrand_withBrandZara_ok() {
-    List<PriceDTO> zaraPrices = priceService.findByBrand(ZARA);
-
-    assertEquals(4, zaraPrices.size());
-  }
-
-  @Test
-  public void findByBrand_withBrandLefties_ok() {
-    List<PriceDTO> leftiesPrices = priceService.findByBrand(LEFTIES);
-
-    assertEquals(2, leftiesPrices.size());
   }
 }

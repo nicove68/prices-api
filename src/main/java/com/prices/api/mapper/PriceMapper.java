@@ -2,19 +2,22 @@ package com.prices.api.mapper;
 
 import com.prices.api.model.PriceDTO;
 import com.prices.api.model.entity.Price;
-import org.modelmapper.ModelMapper;
+import java.time.ZoneId;
 import org.springframework.stereotype.Component;
 
 @Component
 public class PriceMapper {
 
-  private final ModelMapper modelMapper;
 
-  public PriceMapper(ModelMapper modelMapper) {
-    this.modelMapper = modelMapper;
-  }
-
-  public PriceDTO toPriceDTO(Price price) {
-    return modelMapper.map(price, PriceDTO.class);
+  public PriceDTO toPriceDTO(Price price, ZoneId zoneId) {
+    return PriceDTO.builder()
+        .productId(price.getProductId())
+        .brandId(price.getBrandId())
+        .priceList(price.getPriceList())
+        .startDate(price.getStartDate().withZoneSameInstant(zoneId))
+        .endDate(price.getEndDate().withZoneSameInstant(zoneId))
+        .amount(price.getAmount())
+        .curr(price.getCurr())
+        .build();
   }
 }

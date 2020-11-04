@@ -1,7 +1,7 @@
 package com.prices.api.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,8 +16,8 @@ public class PriceDTO {
   private Long productId;
   private int brandId;
   private int priceList;
-  private LocalDateTime startDate;
-  private LocalDateTime endDate;
+  private ZonedDateTime startDate;
+  private ZonedDateTime endDate;
   private BigDecimal amount;
   private String curr;
 }

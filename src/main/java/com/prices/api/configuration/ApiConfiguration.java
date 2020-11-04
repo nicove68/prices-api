@@ -11,7 +11,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.text.SimpleDateFormat;
-import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -30,13 +29,9 @@ public class ApiConfiguration implements WebMvcConfigurer {
         .setSerializationInclusion(NON_NULL)
         .configure(FAIL_ON_EMPTY_BEANS, false)
         .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-        .setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"))
+        .setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX"))
         .registerModule(new JavaTimeModule())
         .registerModule(new Jdk8Module());
   }
 
-  @Bean
-  public ModelMapper modelMapper() {
-    return new ModelMapper();
-  }
 }

@@ -9,9 +9,8 @@ import com.prices.api.model.Brand;
 import com.prices.api.model.PriceDTO;
 import com.prices.api.repository.PriceRepository;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -29,14 +28,6 @@ public class PriceService {
     this.priceMapper = priceMapper;
   }
 
-  public List<PriceDTO> findByBrand(Brand brand) {
-    logger.info("Find all prices for brand [{}]", brand);
-
-    return priceRepository.findAllByBrandId(brand.getId())
-        .stream()
-        .map(priceMapper::toPriceDTO)
-        .collect(Collectors.toList());
-  }
 
   public PriceDTO findActivePrice(String date, Long productId, Brand brand) {
     logger.info("Find active price for date [{}], product_id [{}] and brand [{}]", date, productId, brand);
@@ -44,9 +35,10 @@ public class PriceService {
     ZonedDateTime zonedDateTime = ZonedDateTime.parse(date);
     ZonedDateTime utcZonedDateTime = zonedDateTime.withZoneSameInstant(UTC);
     LocalDateTime utcDateTime = utcZonedDateTime.toLocalDateTime();
+    ZoneId zoneId = zonedDateTime.getZone();
 
     return priceRepository.findActiveProductPrice(utcDateTime, productId, brand.getId())
-        .map(priceMapper::toPriceDTO)
+        .map(price -> priceMapper.toPriceDTO(price, zoneId))
         .orElseThrow(() -> new NotFoundException(format(
             "No active price found for date [%s], product_id [%s] and brand [%s]", date, productId, brand)));
   }

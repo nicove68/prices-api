@@ -1,7 +1,7 @@
 package com.prices.api.model.entity;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,8 +23,8 @@ public class Price {
   private Long id;
 
   private int brandId;
-  private LocalDateTime startDate;
-  private LocalDateTime endDate;
+  private ZonedDateTime startDate;
+  private ZonedDateTime endDate;
   private int priceList;
   private Long productId;
   private int priority;

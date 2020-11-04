@@ -22,7 +22,8 @@ public class ProductController {
     this.priceService = priceService;
   }
 
-  @GetMapping("/{productId}/prices")
+
+  @GetMapping("/{productId}/price")
   public PriceDTO findActiveProductPrice(
       @RequestHeader(value = "x-brand", defaultValue = "ZARA") String brand,
       @PathVariable Long productId,
@@ -31,5 +32,4 @@ public class ProductController {
     validateISODate(date);
     return priceService.findActivePrice(date, productId, Brand.from(brand));
   }
-
 }
