@@ -10,6 +10,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import io.swagger.v3.core.converter.ModelConverters;
+import io.swagger.v3.core.jackson.ModelResolver;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
 import java.text.SimpleDateFormat;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,4 +39,18 @@ public class ApiConfiguration implements WebMvcConfigurer {
         .registerModule(new Jdk8Module());
   }
 
+  @Bean
+  public OpenAPI customOpenAPI() {
+    OpenAPI oa = new OpenAPI()
+        .info(new Info()
+            .title("Prices API")
+            .contact(new Contact()
+                .url("https://github.com/nicove68")
+                .name("Nico Valerga"))
+            .version("v1.0.0")
+            .description("Basic API Rest for product prices")
+        );
+    ModelConverters.getInstance().addConverter(new ModelResolver(springMvcObjectMapper()));
+    return oa;
+  }
 }

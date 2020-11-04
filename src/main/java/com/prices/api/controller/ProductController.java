@@ -5,6 +5,7 @@ import static com.prices.api.validator.DateValidator.validateISODate;
 import com.prices.api.model.Brand;
 import com.prices.api.model.PriceDTO;
 import com.prices.api.service.PriceService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -24,6 +25,7 @@ public class ProductController {
 
 
   @GetMapping("/{productId}/price")
+  @Operation(summary = "Find active product price")
   public PriceDTO findActiveProductPrice(
       @RequestHeader(value = "x-brand", defaultValue = "ZARA") String brand,
       @PathVariable Long productId,
