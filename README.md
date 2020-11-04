@@ -43,7 +43,7 @@ $ mvn test
 
 NOTE: start_date and end_date of prices are stored in database in UTC timezone, for that reason the external consumers of prices-api must use utc_date param in UTC too.
 
-##### Response (with status 200 if exists active price)
+##### Response OK (with status 200 if exists active price)
 
 ``` json
 {
@@ -54,6 +54,24 @@ NOTE: start_date and end_date of prices are stored in database in UTC timezone, 
     "end_date": "2020-12-31T23:59:59Z",
     "amount": 38.95,
     "curr": "EUR"
+}
+```
+
+##### Response not found (with status 404 if not exists active price)
+
+``` json
+{
+    "status": "NOT_FOUND",
+    "body": "No active price found for date [2020-06-16T21:00:00.000Z], product_id [354556] and brand [ZARA]"
+}
+```
+
+##### Response bad request (with status 400 if date is not in ISO 8601 format and UTC timezone)
+
+``` json
+{
+    "status": "BAD_REQUEST",
+    "body": "Invalid date, please use ISO 8601 format in UTC timezone. e.g.: 2000-10-31T01:30:00.000Z"
 }
 ```
 
