@@ -52,7 +52,7 @@ public class ProductControllerTest {
 
     mvc.perform(
         get(BASE_PATH + "/1234/price" )
-            .param("date", "2000-10-31T01:30:00.000Z")
+            .param("utc_date", "2000-10-31T01:30:00.000Z")
             .header("x-brand", "ZARA")
             .contentType(APPLICATION_JSON))
         .andDo(print())

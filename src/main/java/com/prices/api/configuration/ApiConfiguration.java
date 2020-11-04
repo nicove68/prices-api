@@ -16,6 +16,7 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import java.text.SimpleDateFormat;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -37,6 +38,11 @@ public class ApiConfiguration implements WebMvcConfigurer {
         .setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX"))
         .registerModule(new JavaTimeModule())
         .registerModule(new Jdk8Module());
+  }
+
+  @Bean
+  public ModelMapper modelMapper() {
+    return new ModelMapper();
   }
 
   @Bean

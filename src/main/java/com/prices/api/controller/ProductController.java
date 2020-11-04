@@ -1,6 +1,6 @@
 package com.prices.api.controller;
 
-import static com.prices.api.validator.DateValidator.validateISODate;
+import static com.prices.api.validator.DateValidator.validateISODateFormat;
 
 import com.prices.api.model.Brand;
 import com.prices.api.model.PriceDTO;
@@ -29,9 +29,9 @@ public class ProductController {
   public PriceDTO findActiveProductPrice(
       @RequestHeader(value = "x-brand", defaultValue = "ZARA") String brand,
       @PathVariable Long productId,
-      @RequestParam String date) {
+      @RequestParam(value = "utc_date") String utcDate) {
 
-    validateISODate(date);
-    return priceService.findActivePrice(date, productId, Brand.from(brand));
+    validateISODateFormat(utcDate);
+    return priceService.findActivePrice(utcDate, productId, Brand.from(brand));
   }
 }

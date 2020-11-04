@@ -1,7 +1,7 @@
 package com.prices.api.repository;
 
 import com.prices.api.model.entity.Price;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -18,5 +18,5 @@ public interface PriceRepository extends CrudRepository<Price, Long> {
           "AND p.brand_id = ?3 " +
           "ORDER BY p.priority DESC " +
           "LIMIT 1;")
-  Optional<Price> findActiveProductPrice(LocalDateTime date, Long productId, int brandId);
+  Optional<Price> findActiveProductPrice(ZonedDateTime date, Long productId, int brandId);
 }

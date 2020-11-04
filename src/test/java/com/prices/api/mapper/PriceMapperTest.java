@@ -3,12 +3,13 @@ package com.prices.api.mapper;
 import com.prices.api.model.PriceDTO;
 import com.prices.api.model.entity.Price;
 import java.math.BigDecimal;
-import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Spy;
+import org.modelmapper.ModelMapper;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
@@ -16,6 +17,9 @@ public class PriceMapperTest {
 
   @InjectMocks
   private PriceMapper priceMapper;
+
+  @Spy
+  private ModelMapper modelMapper;
 
   @Test
   public void toPriceDTO_ok() {
@@ -31,7 +35,7 @@ public class PriceMapperTest {
         .curr("EUR")
         .build();
 
-    PriceDTO priceDTO = priceMapper.toPriceDTO(entityPrice, ZoneOffset.UTC);
+    PriceDTO priceDTO = priceMapper.toPriceDTO(entityPrice);
 
     Assert.assertEquals(Long.valueOf(9999), priceDTO.getProductId());
     Assert.assertEquals(1, priceDTO.getBrandId());

@@ -1,6 +1,6 @@
 package com.prices.api.validator;
 
-import static com.prices.api.validator.DateValidator.validateISODate;
+import static com.prices.api.validator.DateValidator.validateISODateFormat;
 
 import com.prices.api.exception.rest.BadRequestException;
 import org.junit.Rule;
@@ -19,33 +19,36 @@ public class DateValidatorTest {
   public void isoDateUtc_ok() {
     String date = "2000-10-31T01:30:00.000Z";
 
-    validateISODate(date);
+    validateISODateFormat(date);
   }
 
   @Test
-  public void isoDate_ok() {
+  public void isoDate_withoutUtcFormat_fail() {
+    exception.expect(BadRequestException.class);
+    exception.expectMessage("Invalid date, please use ISO 8601 format in UTC timezone. e.g.: 2000-10-31T01:30:00.000Z");
+
     String date = "2000-10-31T01:30:00.000-05:00";
 
-    validateISODate(date);
+    validateISODateFormat(date);
   }
 
   @Test
   public void onlyDateTime_fail() {
     exception.expect(BadRequestException.class);
-    exception.expectMessage("Invalid date format, please use ISO 8601. Examples: 2000-10-31T01:30:00.000Z, 2000-10-31T01:30:00.000-05:00");
+    exception.expectMessage("Invalid date, please use ISO 8601 format in UTC timezone. e.g.: 2000-10-31T01:30:00.000Z");
 
     String date = "2000-10-31T01:30:00";
 
-    validateISODate(date);
+    validateISODateFormat(date);
   }
 
   @Test
   public void onlyDate_fail() {
     exception.expect(BadRequestException.class);
-    exception.expectMessage("Invalid date format, please use ISO 8601. Examples: 2000-10-31T01:30:00.000Z, 2000-10-31T01:30:00.000-05:00");
+    exception.expectMessage("Invalid date, please use ISO 8601 format in UTC timezone. e.g.: 2000-10-31T01:30:00.000Z");
 
     String date = "2000-10-31";
 
-    validateISODate(date);
+    validateISODateFormat(date);
   }
 }
