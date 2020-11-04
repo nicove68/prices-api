@@ -35,6 +35,13 @@ public class PriceServiceTest {
   }
 
 
+  /**
+   *
+   * NOTE: In order to comply with the task of the exercise,
+   * the name of some tests does not comply with the predetermined nomenclature.
+   *
+   */
+
   @Test
   public void test1_ok() {
     // Test 1: petición a las 10:00 del día 14 del producto 35455   para la brand 1 (ZARA)

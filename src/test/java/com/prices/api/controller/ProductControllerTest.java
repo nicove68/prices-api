@@ -63,7 +63,19 @@ public class ProductControllerTest {
   public void findActiveProductPrice_withWrongBrand_fail() throws Exception {
     mvc.perform(
         get(BASE_PATH + "/1234/price" )
+            .param("utc_date", "2000-10-31T01:30:00.000Z")
             .header("x-brand", "WORLD")
+            .contentType(APPLICATION_JSON))
+        .andDo(print())
+        .andExpect(status().is4xxClientError());
+  }
+
+  @Test
+  public void findActiveProductPrice_withWrongDateFormat_fail() throws Exception {
+    mvc.perform(
+        get(BASE_PATH + "/1234/price" )
+            .param("utc_date", "2000-10-31T01:30:00.000-05:00")
+            .header("x-brand", "ZARA")
             .contentType(APPLICATION_JSON))
         .andDo(print())
         .andExpect(status().is4xxClientError());

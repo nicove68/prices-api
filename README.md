@@ -89,6 +89,7 @@ List of possible improvements:
 - [ ] Create entities: product, brand and priceList to complete the API
 - [ ] Securize API
 - [ ] Building a deployment process
+- [ ] Add coverage tools (like JaCoCo)
 
 
 ## Bibliography

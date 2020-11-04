@@ -1,15 +1,12 @@
 package com.prices.api.service;
 
 import static java.lang.String.format;
-import static java.time.ZoneOffset.UTC;
 
 import com.prices.api.exception.rest.NotFoundException;
 import com.prices.api.mapper.PriceMapper;
 import com.prices.api.model.Brand;
 import com.prices.api.model.PriceDTO;
 import com.prices.api.repository.PriceRepository;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
